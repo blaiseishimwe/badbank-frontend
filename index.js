@@ -7,6 +7,8 @@ app.listen(PORT, () => {
   console.log(`App listening on port: ${PORT}`);
 });
 
+app.use(express.static("build"));
+
 app.get("*", (req, res) => {
   res.sendFile(__dirname + "/build/index.html");
 });
