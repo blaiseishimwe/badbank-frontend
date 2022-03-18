@@ -17,7 +17,7 @@ class Login extends React.Component {
       <Form>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
-          <input
+          <Form.Control
             type="email"
             name="email"
             value={this.state.email}
@@ -26,7 +26,7 @@ class Login extends React.Component {
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
-          <input
+          <Form.Control
             type="password"
             name="password"
             value={this.state.password}

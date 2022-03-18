@@ -7,20 +7,29 @@ class Withdraw extends React.Component {
   };
 
   handleOnChange = (e) => {
-    this.setState({ withdrawAmount: Number(e.target.value) });
+    this.setState({ withdrawAmount: e.target.value });
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.setState({
+      withdrawAmount: 0,
+    });
+    this.props.handleWithdraw(this.state.withdrawAmount);
   };
 
   render() {
     // Import or access the props from parent component App via object distructuring
-    const { balance, handleWithdraw } = this.props;
+    const { balance, fullname } = this.props;
 
     return (
       <Form>
-        <h1>Your current balance is: {balance}</h1>
+        <h2>{`Welcome to the bank, ${fullname}`}</h2>
+        <h2>Your current balance is: {balance}</h2>
         <Form.Group className="mb-3" controlId="withdrawAmount">
           <Form.Label>Withdraw Amount</Form.Label>
           {/* <Form.Control type="number" placeholder="Enter withdraw amount" /> */}
-          <input
+          <Form.Control
             type="number"
             value={this.state.withdrawAmount}
             onChange={this.handleOnChange}
@@ -30,8 +39,7 @@ class Withdraw extends React.Component {
           variant="primary"
           type="submit"
           onClick={(e) => {
-            e.preventDefault();
-            handleWithdraw(this.state.withdrawAmount);
+            this.handleSubmit(e);
           }}
         >
           Withdraw

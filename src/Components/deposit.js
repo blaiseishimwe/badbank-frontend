@@ -11,13 +11,22 @@ class Deposit extends React.Component {
     this.setState({ depositAmount: e.target.value });
   };
 
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.setState({
+      depositAmount: 0,
+    });
+    this.props.handleDeposit(this.state.depositAmount);
+  };
+
   render() {
     // Import or access the props from parent component App via object distructuring
-    const { balance, handleDeposit } = this.props;
+    const { balance, fullname } = this.props;
 
     return (
       <Form>
-        <h1>Your current balance is: {balance}</h1>
+        <h2>{`Welcome to the Bank, ${fullname}`}</h2>
+        <h2>Your current balance is: {balance}</h2>
         <Form.Group className="mb-3" controlId="depositAmount">
           <Form.Label>Deposit Amount</Form.Label>
           {/* <Form.Control type="number" placeholder="Enter deposit amount" /> */}
@@ -33,10 +42,7 @@ class Deposit extends React.Component {
         <Button
           variant="primary"
           type="submit"
-          onClick={(e) => {
-            e.preventDefault();
-            handleDeposit(this.state.depositAmount);
-          }}
+          onClick={(e) => this.handleSubmit(e)}
         >
           Deposit
         </Button>

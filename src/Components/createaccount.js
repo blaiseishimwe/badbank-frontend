@@ -4,7 +4,7 @@ import { Form, Button } from "react-bootstrap";
 class CreateAccount extends React.Component {
   //create a local state for the input value
   state = {
-    fullName: "",
+    fullname: "",
     email: "",
     password: "",
   };
@@ -12,9 +12,20 @@ class CreateAccount extends React.Component {
   handleOnchange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.setState({
+      fullname: "",
+      email: "",
+      password: "",
+    });
+    this.props.handleCreateAccount(this.state);
+  };
+
   render() {
-    const { handleCreateAccount, accountInfo } = this.props;
-    // const { fullName, email, password } = this.state;
+    const { accountInfo } = this.props;
+    // const { fullname, email, password } = this.state;
     const user = this.state;
     //accountInfo = this.state;
     console.log(user);
@@ -27,12 +38,12 @@ class CreateAccount extends React.Component {
           <Form.Label>Fullname</Form.Label>
           <Form.Control
             type="string"
-            name="fullName"
-            value={user.fullName}
+            name="fullname"
+            value={user.fullname}
             placeholder="Enter your fullname"
             onChange={this.handleOnchange}
           />
-          <ErrorMessage fieldValue={this.state.fullName} />
+          <ErrorMessage fieldValue={this.state.fullname} />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicEmail" aria-required>
@@ -49,7 +60,7 @@ class CreateAccount extends React.Component {
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control
-            type="string"
+            type="password"
             name="password"
             value={user.password}
             placeholder="Enter password"
@@ -58,7 +69,7 @@ class CreateAccount extends React.Component {
           <ErrorMessage fieldValue={this.state.password} />
         </Form.Group>
 
-        {this.state.fullName.length === 0 ||
+        {this.state.fullname.length === 0 ||
         this.state.email.length === 0 ||
         this.state.password.length === 0 ? (
           <Button disabled>Submit</Button>
@@ -66,10 +77,7 @@ class CreateAccount extends React.Component {
           <Button
             variant="primary"
             type="submit"
-            onClick={(e) => {
-              e.preventDefault();
-              handleCreateAccount(this.state);
-            }}
+            onClick={(e) => this.handleSubmit(e)}
           >
             Submit
           </Button>

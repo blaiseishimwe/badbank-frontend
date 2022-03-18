@@ -34,7 +34,7 @@ export async function withdraw({ id, withdrawAmount }) {
   }
 }
 
-export async function createaccount({ fullName, email, password }) {
+export async function createaccount({ fullname, email, password }) {
   const url = `${API_BASE_URL}/users`;
 
   try {
@@ -43,7 +43,7 @@ export async function createaccount({ fullName, email, password }) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ fullName, email, password }),
+      body: JSON.stringify({ fullname, email, password }),
     });
     return response.json();
   } catch (error) {
@@ -56,7 +56,7 @@ export async function login({ email, password }) {
 
   try {
     const response = await fetch(url, {
-      method: "PUT",
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
